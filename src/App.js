@@ -15,6 +15,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { red } from "@mui/material/colors";
 
 ///////////////////////////////transction//////////////////////////////
 const transaction = {
@@ -88,7 +89,7 @@ function App() {
       .catch(function (error) {
         setError(transaction[currentLanguage].noData);
       });
-  }, [city]);
+  }, [city, currentLanguage]);
 
   useEffect(() => {
     setError(null);
@@ -121,6 +122,9 @@ function App() {
           flexDirection: "column",
           gap: 3,
           direction: currentLanguage === "ar" ? "rtl" : "ltr",
+          overflow:'scroll',
+          py:isMobile?10:0
+        
         }}
       >
         {/* ******************************************************input******************************************************** */}
@@ -128,8 +132,9 @@ function App() {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            gap: 2,
+            gap:isMobile? 2:3,
             width: isMobile ? "95%" : isTablet ? "70%" : "40%",
+           
           }}
         >
           <TextField
@@ -177,7 +182,7 @@ function App() {
         <Box
           sx={{
             bgcolor: "rgb(255,255,255,0.5)",
-            minHeight: 350,
+            minHeight:isMobile?450: 350,
             width: isMobile ? "95%" : isTablet ? "70%" : "40%",
             borderRadius: "10px",
             mx: "auto",
@@ -224,10 +229,9 @@ function App() {
                 flexDirection={"row"}
                 alignItems={"center"}
                 justifyContent={"space-around"}
-                sx={{ mt: 3 }}
+                sx={{ mt: 2 }}
               >
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  {" "}
                   <Box
                     sx={{
                       display: "flex",
@@ -235,7 +239,7 @@ function App() {
                         ? "space-evenly"
                         : "space-between",
                       alignItems: "center",
-                      mt: isMobile ? 2 : 0,
+                      mt: isMobile ? 1 : 0,
                       width: isMobile ? "50%" : "40%",
                     }}
                   >
@@ -261,7 +265,7 @@ function App() {
                     </Box>
                   </Box>
                   <Box>
-                    <Typography variant="h4" sx={{ mt: 1 }} color="grey">
+                    <Typography variant={isMobile?'h5':'h3'} sx={{ mx:0.5}} color="grey">
                       {data.weather[0].description}
                     </Typography>
                     <Box
